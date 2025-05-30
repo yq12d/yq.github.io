@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Google",
+    "url": "https://www.google.com",
+    "icon": "🌐",
+    "dateAdded": "2024-05-28T10:00:00.000Z"
+  },
+  {
+    "name": "GitHub",
+    "url": "https://www.github.com",
+    "icon": "🐙",
+    "dateAdded": "2024-05-27T12:30:00.000Z"
+  },
+  {
+    "name": "Developer Mozilla",
+    "url": "https://developer.mozilla.org",
+    "icon": "🦊",
+    "dateAdded": "2024-05-29T08:15:00.000Z"
+  }
+]
+
