@@ -1,21 +1,601 @@
-[
-  {
-    "name": "Google",
-    "url": "https://www.google.com",
-    "icon": "🌐",
-    "dateAdded": "2024-05-28T10:00:00.000Z"
-  },
-  {
-    "name": "GitHub",
-    "url": "https://www.github.com",
-    "icon": "🐙",
-    "dateAdded": "2024-05-27T12:30:00.000Z"
-  },
-  {
-    "name": "Developer Mozilla",
-    "url": "https://developer.mozilla.org",
-    "icon": "🦊",
-    "dateAdded": "2024-05-29T08:15:00.000Z"
-  }
+[{
+		"name": "Google",
+		"url": "https://www.google.com",
+		"icon": "🌐",
+		"dateAdded": "2024-05-28T10:00:00.000Z"
+	},
+	{
+		"name": "GitHub",
+		"url": "https://www.github.com",
+		"icon": "🐙",
+		"dateAdded": "2024-05-27T12:30:00.000Z"
+	},
+	{
+		"name": "Developer Mozilla",
+		"url": "https://developer.mozilla.org",
+		"icon": "🦊",
+		"dateAdded": "2024-05-29T08:15:00.000Z"
+	},
+	{
+		"name": "Interactive Code Review Assistant - Claude",
+		"url": "https://claude.ai/chat/959a269f-0a4a-44f4-bf59-043530d26adc",
+		"icon": "🌐",
+		"dateAdded": "2025-05-27T03:41:44.000Z"
+	},
+	{
+		"name": "Genspark - Enhanced Interaction Features for File Importing",
+		"url": "https://www.genspark.ai/agents?id=1c42aabf-0112-4d98-a523-cab3078e8cae",
+		"icon": "🌐",
+		"dateAdded": "2025-02-18T07:06:27.000Z"
+	},
+	{
+		"name": "数字课程平台(管理端)",
+		"url": "https://study.cqie.edu.cn/login",
+		"icon": "🌐",
+		"dateAdded": "2024-10-07T14:16:31.000Z"
+	},
+	{
+		"name": "百度网盘高速下载转换",
+		"url": "https://bd.dk698.com/index.php?key=11415b76a45782ca5cd04a64c68be730",
+		"icon": "",
+		"dateAdded": "2025-03-18T14:28:34.000Z"
+	},
+	{
+		"name": "足球数据库_最全面各大足球赛事数据库_足球赛程资料库-球天下体育",
+		"url": "https://data.qtx.com/",
+		"icon": "",
+		"dateAdded": "2025-03-30T13:23:22.000Z"
+	},
+	{
+		"name": "搜磁力 - 磁力链接搜索引擎在线磁力搜索磁力链接下载",
+		"url": "https://www.soucili.sbs/",
+		"icon": "",
+		"dateAdded": "2025-03-24T13:37:44.000Z"
+	},
+	{
+		"name": "在线修改图片大小尺寸；免费抠图照片处理工具 - AI改图神器",
+		"url": "https://img.logosc.cn/",
+		"icon": "",
+		"dateAdded": "2023-10-23T11:18:37.000Z"
+	},
+	{
+		"name": "大先生",
+		"url": "https://chat.zju.edu.cn/",
+		"icon": "",
+		"dateAdded": "2025-02-23T14:15:52.000Z"
+	},
+	{
+		"name": "登录--成都众芯源创仓库管理系统",
+		"url": "http://47.109.193.135:8089/sys/toLogin",
+		"icon": "",
+		"dateAdded": "2024-10-11T04:46:33.000Z"
+	},
+	{
+		"name": "去水印首选",
+		"url": "https://dewatermark.ai/upload",
+		"icon": "",
+		"dateAdded": "2024-07-03T05:43:36.000Z"
+	},
+	{
+		"name": "文档转换器 (在线自由) — Convertio",
+		"url": "https://convertio.co/zh/document-converter/",
+		"icon": "",
+		"dateAdded": "2023-10-28T05:10:08.000Z"
+	},
+	{
+		"name": "超级PDF|简单强大的PDF在线处理工具",
+		"url": "https://xpdf.cn/",
+		"icon": "",
+		"dateAdded": "2023-08-05T08:28:04.000Z"
+	},
+	{
+		"name": "办公人导航-实用的办公生活导航网站！",
+		"url": "https://www.bgrdh.com/?ref=www.widiz.com",
+		"icon": "",
+		"dateAdded": "2023-10-23T10:57:49.000Z"
+	},
+	{
+		"name": "吾爱导航 - 收录全网高品质网址、共享优质网络资源",
+		"url": "https://www.gxfcseo.com/",
+		"icon": "",
+		"dateAdded": "2023-12-16T10:22:39.000Z"
+	},
+	{
+		"name": "免费在线图片/视频压缩工具 | 图片压缩 | 免费 JPG PNG GIF 图像压缩",
+		"url": "http://www.yalijuda.com/",
+		"icon": "",
+		"dateAdded": "2023-10-20T03:37:20.000Z"
+	},
+	{
+		"name": "动漫岛 - 日本新番动漫，好看的动漫大全聚合网站",
+		"url": "https://www.dmdao.tv/?ref=www.gxfcseo.com",
+		"icon": "",
+		"dateAdded": "2024-04-07T09:57:04.000Z"
+	},
+	{
+		"name": "AI工具集 | 1000+ AI工具集合官网，国内外AI工具集导航大全",
+		"url": "https://ai-bot.cn/#term-13",
+		"icon": "",
+		"dateAdded": "2024-07-15T02:39:29.000Z"
+	},
+	{
+		"name": "Gnomic智能体平台|AI Agent|CarrotAI大模型",
+		"url": "https://www.gnomic.cn/?wuai&ref=www.gxfcseo.com",
+		"icon": "",
+		"dateAdded": "2024-05-11T15:29:56.000Z"
+	},
+	{
+		"name": "AnyBT",
+		"url": "https://anybt.eth.limo/",
+		"icon": "",
+		"dateAdded": "2025-05-20T12:32:23.000Z"
+	},
+	{
+		"name": "Excel 转换为 insert SQL - 在线表格转换工具",
+		"url": "https://tableconvert.com/zh-cn/excel-to-sql",
+		"icon": "",
+		"dateAdded": "2024-07-11T08:58:23.000Z"
+	},
+	{
+		"name": "站长工具网-好用的在线工具都在这里！",
+		"url": "https://tool.dlidli.wang/",
+		"icon": "",
+		"dateAdded": "2024-07-03T03:42:14.000Z"
+	},
+	{
+		"name": "改图鸭-在线图片压缩、图片编辑、图片格式转换工具",
+		"url": "https://www.gaituya.com/",
+		"icon": "",
+		"dateAdded": "2024-06-20T06:41:12.000Z"
+	},
+	{
+		"name": "域名绑定服务器_域名关联服务器-CSDN博客",
+		"url": "https://blog.csdn.net/qq_44769557/article/details/120506530",
+		"icon": "",
+		"dateAdded": "2024-07-03T01:14:45.000Z"
+	},
+	{
+		"name": "AI 魔术橡皮擦, 利用2024年最先进人工智能 AI 帮你将图片中任何不需要的部分智能擦除、填补背景内容、消除水印",
+		"url": "https://jpgrm.com/",
+		"icon": "",
+		"dateAdded": "2024-07-03T05:45:21.000Z"
+	},
+	{
+		"name": "我的工具-程序员编程开发必备",
+		"url": "https://tooltt.com/",
+		"icon": "",
+		"dateAdded": "2024-07-11T08:49:02.000Z"
+	},
+	{
+		"name": "V2free",
+		"url": "https://w1.v2ai.top/user/node",
+		"icon": "",
+		"dateAdded": "2024-09-02T08:30:06.000Z"
+	},
+	{
+		"name": "V2free",
+		"url": "https://w1.v2ai.top/auth/register",
+		"icon": "",
+		"dateAdded": "2024-09-02T08:30:13.000Z"
+	},
+	{
+		"name": "清华大学开源软件镜像站 | Tsinghua Open Source Mirror",
+		"url": "https://mirrors.tuna.tsinghua.edu.cn/",
+		"icon": "",
+		"dateAdded": "2024-10-06T02:50:50.000Z"
+	},
+	{
+		"name": "小白学术 - 爱好分享小站",
+		"url": "https://www.sssam.com/?ref=www.gxfcseo.com",
+		"icon": "",
+		"dateAdded": "2024-08-16T09:47:45.000Z"
+	},
+	{
+		"name": "免费下载缺失的 DLL 文件 | DLL‑files.com",
+		"url": "https://cn.dll-files.com/",
+		"icon": "",
+		"dateAdded": "2024-09-09T01:34:04.000Z"
+	},
+	{
+		"name": "异常教程 - 提供IDEA激活破解码、Pycharm激活教程",
+		"url": "https://www.exception.site/",
+		"icon": "",
+		"dateAdded": "2024-09-09T05:48:28.000Z"
+	},
+	{
+		"name": "云解析 DNS",
+		"url": "https://dns.console.aliyun.com/?spm=5176.100251.111252.14.594f4f15Bqt9Va#/dns/setting/corestrong.cn",
+		"icon": "",
+		"dateAdded": "2024-09-13T10:26:33.000Z"
+	},
+	{
+		"name": "云服务器低价长效特价精选",
+		"url": "https://www.aliyun.com/daily-act/ecs/99program",
+		"icon": "",
+		"dateAdded": "2024-09-13T10:31:03.000Z"
+	},
+	{
+		"name": "(阿里云)Linux部署静态html页面_阿里云搭建静态页面-CSDN博客",
+		"url": "https://blog.csdn.net/m0_50370837/article/details/126134603",
+		"icon": "",
+		"dateAdded": "2024-09-16T06:10:15.000Z"
+	},
+	{
+		"name": "ICP代备案管理系统",
+		"url": "https://beian.aliyun.com/pcContainer/uploadInfo?baOrderId=2030495615564&orderType=3",
+		"icon": "",
+		"dateAdded": "2024-09-16T08:34:56.000Z"
+	},
+	{
+		"name": "简单云(ezOne.work)一站式云原生DevOps研发协同平台|研发效能平台|让研发“简单一点”",
+		"url": "https://zxscss.ezone.work/workbench/mytask",
+		"icon": "",
+		"dateAdded": "2024-09-23T06:54:25.000Z"
+	},
+	{
+		"name": "【2023】Manim环境配置（极简版） - 知乎",
+		"url": "https://zhuanlan.zhihu.com/p/614813604",
+		"icon": "",
+		"dateAdded": "2024-10-06T10:49:50.000Z"
+	},
+	{
+		"name": "批量导入功能java实现(从前端到后端)_java实现批量上传的前后端方法-CSDN博客",
+		"url": "https://blog.csdn.net/qq_37641547/article/details/109259233",
+		"icon": "",
+		"dateAdded": "2024-10-13T09:42:59.000Z"
+	},
+	{
+		"name": "【JAVA】一篇聊透百万级数据导入导出场景问题、大数据处理策略及优化方案、EasyExcel 和 EasyPOI的玩法详解_java apache poi 百万级数据导入-CSDN博客",
+		"url": "https://blog.csdn.net/Aaaaaaatwl/article/details/142173486",
+		"icon": "",
+		"dateAdded": "2024-10-13T09:46:58.000Z"
+	},
+	{
+		"name": "Webstorm 2024.2.2 最新激活码，破解版安装教程（亲测至2099年~） - 异常教程",
+		"url": "https://www.exception.site/article/1769",
+		"icon": "",
+		"dateAdded": "2024-10-22T09:34:05.000Z"
+	},
+	{
+		"name": "jpy",
+		"url": "https://www.jpy.wang/page/jrebel.html",
+		"icon": "",
+		"dateAdded": "2024-10-07T15:45:30.000Z"
+	},
+	{
+		"name": "在线人工翻译|文章全文翻译_文档/文献/文件翻译-翻译狗",
+		"url": "https://www.fanyigou.com/trans/",
+		"icon": "",
+		"dateAdded": "2024-10-24T16:01:43.000Z"
+	},
+	{
+		"name": "AS-Editor: 基于vue可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。",
+		"url": "https://gitee.com/was666/as-editor#https://gitee.com/link?target=http%3A%2F%2Fqiniu-plat.juroom.cn",
+		"icon": "",
+		"dateAdded": "2024-10-26T11:10:31.000Z"
+	},
+	{
+		"name": "碳素 |创建和共享源代码的精美图像",
+		"url": "https://carbon.now.sh/",
+		"icon": "",
+		"dateAdded": "2024-10-30T07:31:09.000Z"
+	},
+	{
+		"name": "Carbon | Create and share beautiful images of your source code",
+		"url": "https://carbon.now.sh/?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false",
+		"icon": "",
+		"dateAdded": "2024-10-30T07:53:20.000Z"
+	},
+	{
+		"name": "硅基流动统一登录",
+		"url": "https://account.siliconflow.cn/login?redirect=https%3A%2F%2Fcloud.siliconflow.cn&invitation=XiytTEhq",
+		"icon": "",
+		"dateAdded": "2024-10-30T08:02:54.000Z"
+	},
+	{
+		"name": "山茶红 - 中国色 - 中国传统颜色",
+		"url": "https://www.zhongguose.com/?ref=www.gxfcseo.com#shanchahong",
+		"icon": "",
+		"dateAdded": "2024-10-30T13:23:16.000Z"
+	},
+	{
+		"name": "电影狗 - 专业电影搜索引擎",
+		"url": "https://www.dyg2024.com/",
+		"icon": "",
+		"dateAdded": "2024-11-01T09:16:44.000Z"
+	},
+	{
+		"name": "RuoYi-WMS-VUE/docs/大屏.png at master · zccbbg/RuoYi-WMS-VUE",
+		"url": "https://github.com/zccbbg/RuoYi-WMS-VUE/blob/master/docs/%E5%A4%A7%E5%B1%8F.png",
+		"icon": "",
+		"dateAdded": "2024-11-02T15:57:38.000Z"
+	},
+	{
+		"name": "爱上她的理由 第01集完整版免费在线观看-555电影",
+		"url": "https://topwuwu.shop/vodplay/423230-3-1.html",
+		"icon": "",
+		"dateAdded": "2024-11-03T03:12:51.000Z"
+	},
+	{
+		"name": "leedl-tutorial/Homework at master · datawhalechina/leedl-tutorial",
+		"url": "https://github.com/datawhalechina/leedl-tutorial/tree/master/Homework",
+		"icon": "",
+		"dateAdded": "2024-11-05T16:15:20.000Z"
+	},
+	{
+		"name": "SiliconCloud",
+		"url": "https://cloud.siliconflow.cn/models",
+		"icon": "",
+		"dateAdded": "2024-11-07T13:32:13.000Z"
+	},
+	{
+		"name": "NotebookLM | Learn AI",
+		"url": "https://learnai.tw/tools/notebooklm/",
+		"icon": "",
+		"dateAdded": "2024-11-08T12:55:37.000Z"
+	},
+	{
+		"name": "腾讯交互翻译TranSmart",
+		"url": "https://transmart.qq.com/zh-CN/file",
+		"icon": "",
+		"dateAdded": "2024-11-10T15:21:50.000Z"
+	},
+	{
+		"name": "成都众芯源创科技有限公司",
+		"url": "http://www.corestrong.cn/",
+		"icon": "",
+		"dateAdded": "2024-11-12T08:14:28.000Z"
+	},
+	{
+		"name": "豆包 MarsCode - 代码练习 - 你的 AI 代码陪练",
+		"url": "https://www.marscode.cn/practice-intro?utm_source=school&utm_medium=datawhalecpa&utm_campaign=campus",
+		"icon": "",
+		"dateAdded": "2024-11-15T16:11:18.000Z"
+	},
+	{
+		"name": "MarsCode",
+		"url": "https://www.marscode.cn/practice/r38xwq6qvw5oor?",
+		"icon": "",
+		"dateAdded": "2024-11-15T16:16:57.000Z"
+	},
+	{
+		"name": "试刮体验列表",
+		"url": "https://www.lottery.gov.cn/xdgg/sgty/",
+		"icon": "",
+		"dateAdded": "2024-11-16T05:56:46.000Z"
+	},
+	{
+		"name": "Remix Icon - Open source icon library",
+		"url": "https://remixicon.com/",
+		"icon": "",
+		"dateAdded": "2024-11-16T12:53:00.000Z"
+	},
+	{
+		"name": "IconKitchen",
+		"url": "https://icon.kitchen/i/H4sIAAAAAAAAA6tWKkvMKU0tVrKqVkpJLMoOyUjNTVWySkvMKU6t1VHKzU8pzQHJRisl5qUU5WemKOkoZeYXA8ny1CSl2FoApT8%2BHkAAAAA%3D",
+		"icon": "",
+		"dateAdded": "2024-11-16T12:59:25.000Z"
+	},
+	{
+		"name": "带有 SVG 插图的漂亮库 - Vectorcraftr",
+		"url": "https://vectorcraftr.com/",
+		"icon": "",
+		"dateAdded": "2024-11-16T13:04:12.000Z"
+	},
+	{
+		"name": "工作台 - ScriptEcho",
+		"url": "https://admin.scriptecho.cn/project?pageId=1858890319359217665",
+		"icon": "",
+		"dateAdded": "2024-11-19T15:09:44.000Z"
+	},
+	{
+		"name": "神源 |手绘外观和感觉 • 协作 • 安全",
+		"url": "https://excalidraw.com/",
+		"icon": "",
+		"dateAdded": "2024-11-20T04:00:32.000Z"
+	},
+	{
+		"name": "Software 2.0 - 汇智网",
+		"url": "http://www.hubwiz.com/blog/",
+		"icon": "",
+		"dateAdded": "2024-11-20T04:13:35.000Z"
+	},
+	{
+		"name": "hoarder-app/hoarder：一个可自托管的书签所有内容应用程序（链接、笔记和图像），具有基于 AI 的自动标记和全文搜索",
+		"url": "https://github.com/hoarder-app/hoarder?tab=readme-ov-file",
+		"icon": "",
+		"dateAdded": "2024-11-20T04:19:46.000Z"
+	},
+	{
+		"name": "t-tlearning.com/p/t_pc/course_pc_detail/no_permission/term_6728750922d74_9Rm46s/7",
+		"url": "https://t-tlearning.com/p/t_pc/course_pc_detail/no_permission/term_6728750922d74_9Rm46s/7",
+		"icon": "",
+		"dateAdded": "2024-11-24T04:10:43.000Z"
+	},
+	{
+		"name": "cobalt下载视频神器",
+		"url": "https://cobalt.tools/",
+		"icon": "",
+		"dateAdded": "2024-12-15T06:34:01.000Z"
+	},
+	{
+		"name": "介绍 | vue-element-plus-admin",
+		"url": "https://element-plus-admin-doc.cn/guide/introduction.html",
+		"icon": "",
+		"dateAdded": "2024-12-15T15:26:31.000Z"
+	},
+	{
+		"name": "wo4K|顶级4K蓝光资源网 海量4K超清1080P电影美剧纪录片演唱会视频资源免费下载",
+		"url": "https://www.wo4k.com/",
+		"icon": "",
+		"dateAdded": "2025-01-06T08:03:16.000Z"
+	},
+	{
+		"name": "NingNing0111/know-hub-ai: Spring AI and PGVector 基于个人知识库的AI问答系统",
+		"url": "https://github.com/NingNing0111/know-hub-ai?tab=readme-ov-file",
+		"icon": "",
+		"dateAdded": "2025-01-15T08:46:18.000Z"
+	},
+	{
+		"name": "datawhalechina/coze-ai-assistant: 该项目围绕 Coze 打造 AI 私人提效助理展开，整合实用 AI 工作流并做拆解，同时准备提示词手册和案例手册，旨在展示项目可行性，帮助学习者更好地理解和实操相关技能。",
+		"url": "https://github.com/datawhalechina/coze-ai-assistant",
+		"icon": "",
+		"dateAdded": "2025-01-15T08:50:33.000Z"
+	},
+	{
+		"name": "手把手教你从零搭建自己的知识库_搭建个人知识库-CSDN博客",
+		"url": "https://blog.csdn.net/weixin_42907150/article/details/136047527",
+		"icon": "",
+		"dateAdded": "2025-01-15T08:52:44.000Z"
+	},
+	{
+		"name": "1 new message",
+		"url": "https://fixthephoto.com/",
+		"icon": "",
+		"dateAdded": "2025-01-20T03:46:53.000Z"
+	},
+	{
+		"name": "newlxj/Crawling_VectorDB_LLM: 从零开始搭建爬虫+向量数据库+LLM大模型构建企业私有化知识库",
+		"url": "https://github.com/newlxj/Crawling_VectorDB_LLM",
+		"icon": "",
+		"dateAdded": "2025-01-21T06:01:55.000Z"
+	},
+	{
+		"name": "GitHub 文件加速",
+		"url": "https://github.moeyy.xyz/",
+		"icon": "",
+		"dateAdded": "2025-02-05T07:35:08.000Z"
+	},
+	{
+		"name": "localhost:11434",
+		"url": "http://localhost:11434/",
+		"icon": "",
+		"dateAdded": "2025-02-06T05:46:23.000Z"
+	},
+	{
+		"name": "快速入门 - MaxKB 文档",
+		"url": "https://maxkb.cn/docs/quick_start/",
+		"icon": "",
+		"dateAdded": "2025-02-08T01:58:06.000Z"
+	},
+	{
+		"name": "集成电路EDA设计精英挑战赛",
+		"url": "https://eda.icisc.cn/download/toVideoDetail?id=c5d966073f054d03aa75e03253e304f7",
+		"icon": "",
+		"dateAdded": "2025-02-23T08:48:12.000Z"
+	},
+	{
+		"name": "Python 实战：如何给你的程序添加授权码机制_使用软件,作者要mac地址后给授权-CSDN博客",
+		"url": "https://blog.csdn.net/wenxuhonghe/article/details/127880072",
+		"icon": "",
+		"dateAdded": "2025-02-24T10:37:47.000Z"
+	},
+	{
+		"name": "Football - scores, schedule & odds | Sofascore",
+		"url": "https://www.sofascore.com/",
+		"icon": "",
+		"dateAdded": "2025-02-27T11:48:26.000Z"
+	},
+	{
+		"name": "微软Office各版本在线和离线安装包 Microsoft官方免费下载地址",
+		"url": "https://www.zhihu.com/tardis/zm/art/661035592",
+		"icon": "",
+		"dateAdded": "2025-03-01T09:36:42.000Z"
+	},
+	{
+		"name": "动手学数据分析 - Notebook - Mo",
+		"url": "https://momodel.cn/workspace/67c866d76597bfbb7c350dda/app",
+		"icon": "",
+		"dateAdded": "2025-03-05T15:15:48.000Z"
+	},
+	{
+		"name": "microsoft/markitdown：用于将文件和 Office 文档转换为 Markdown 的 Python 工具。",
+		"url": "https://github.com/microsoft/markitdown",
+		"icon": "",
+		"dateAdded": "2025-03-04T14:10:08.000Z"
+	},
+	{
+		"name": "Mo-人工智能教学实训平台，在线学习Python、AI、大模型、AI写作绘画课程，零基础轻松入门",
+		"url": "https://momodel.cn/?src=zjuhomepage",
+		"icon": "",
+		"dateAdded": "2025-03-05T14:59:52.000Z"
+	},
+	{
+		"name": "answer",
+		"url": "http://localhost:9080/",
+		"icon": "",
+		"dateAdded": "2025-03-11T14:09:47.000Z"
+	},
+	{
+		"name": "MinerU",
+		"url": "https://mineru.net/OpenSourceTools/Extractor/PDF/270e0286-de97-4479-9fd5-1bec29e6b6d7",
+		"icon": "",
+		"dateAdded": "2025-03-12T03:11:10.000Z"
+	},
+	{
+		"name": "首页 · 魔搭社区",
+		"url": "https://www.modelscope.cn/home",
+		"icon": "",
+		"dateAdded": "2025-03-15T13:51:45.000Z"
+	},
+	{
+		"name": "LlamaIndex - LlamaIndex--数据处理",
+		"url": "https://docs.llamaindex.ai/en/stable/",
+		"icon": "",
+		"dateAdded": "2025-03-15T14:13:46.000Z"
+	},
+	{
+		"name": "Dify 平台知识库实战｜基于excel 格式的问答调优 - 53AI-AI生产力的卓越领导者（大模型知识库|大模型训练|智能体开发）",
+		"url": "https://www.53ai.com/news/dify/2025031646512.html",
+		"icon": "",
+		"dateAdded": "2025-03-18T03:49:27.000Z"
+	},
+	{
+		"name": "码农书籍网-IT书籍pdf推荐下载网站",
+		"url": "https://www.manongbook.com/",
+		"icon": "",
+		"dateAdded": "2025-03-24T06:15:08.000Z"
+	},
+	{
+		"name": "Adobe Acrobat Pro DC 2024 中文破解版免费下载|Acrobat dc 24网盘分享-哇哦菌",
+		"url": "https://www.waodown.com/7182.html",
+		"icon": "",
+		"dateAdded": "2025-03-25T06:25:43.000Z"
+	},
+	{
+		"name": "Practice Introduction to Neural Networks | Brilliant",
+		"url": "https://brilliant.org/courses/intro-neural-networks/",
+		"icon": "",
+		"dateAdded": "2025-04-08T06:13:24.000Z"
+	},
+	{
+		"name": "GitHub - infiniflow/ragflow: RAGFlow is an open-source RAG (Retrieval-Augmented Generation) engine based on deep document understanding.",
+		"url": "https://github.com/infiniflow/ragflow?tab=readme-ov-file",
+		"icon": "",
+		"dateAdded": "2025-04-12T15:20:14.000Z"
+	},
+	{
+		"name": "Watch Global & Local Live TV Online for Free - tv.garden",
+		"url": "https://tv.garden/us/BTtTvg520N96K8",
+		"icon": "",
+		"dateAdded": "2025-04-17T13:34:34.000Z"
+	},
+	{
+		"name": "智能体应用_大模型服务平台百炼(Model Studio)-阿里云帮助中心",
+		"url": "https://help.aliyun.com/zh/model-studio/single-agent-application?spm=a2c4g.11186623.0.0.4f9365c5QAY5bY",
+		"icon": "",
+		"dateAdded": "2025-04-30T12:44:01.000Z"
+	},
+	{
+		"name": "JoinQuant聚宽量化投研平台",
+		"url": "https://www.joinquant.com/",
+		"icon": "",
+		"dateAdded": "2025-05-05T14:30:24.000Z"
+	},
+	{
+		"name": "软仓 | RuanCang.Net",
+		"url": "https://www.ruancang.net/",
+		"icon": "",
+		"dateAdded": "2025-05-19T14:57:38.000Z"
+	}
 ]
-
