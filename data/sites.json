@@ -59,12 +59,6 @@
 		"dateAdded": "2023-10-23T11:18:37.000Z"
 	},
 	{
-		"name": "大先生",
-		"url": "https://chat.zju.edu.cn/",
-		"icon": "",
-		"dateAdded": "2025-02-23T14:15:52.000Z"
-	},
-	{
 		"name": "登录--成都众芯源创仓库管理系统",
 		"url": "http://47.109.193.135:8089/sys/toLogin",
 		"icon": "",
@@ -105,12 +99,6 @@
 		"url": "http://www.yalijuda.com/",
 		"icon": "",
 		"dateAdded": "2023-10-20T03:37:20.000Z"
-	},
-	{
-		"name": "动漫岛 - 日本新番动漫，好看的动漫大全聚合网站",
-		"url": "https://www.dmdao.tv/?ref=www.gxfcseo.com",
-		"icon": "",
-		"dateAdded": "2024-04-07T09:57:04.000Z"
 	},
 	{
 		"name": "AI工具集 | 1000+ AI工具集合官网，国内外AI工具集导航大全",
@@ -173,12 +161,6 @@
 		"dateAdded": "2024-09-02T08:30:06.000Z"
 	},
 	{
-		"name": "V2free",
-		"url": "https://w1.v2ai.top/auth/register",
-		"icon": "",
-		"dateAdded": "2024-09-02T08:30:13.000Z"
-	},
-	{
 		"name": "清华大学开源软件镜像站 | Tsinghua Open Source Mirror",
 		"url": "https://mirrors.tuna.tsinghua.edu.cn/",
 		"icon": "",
@@ -207,30 +189,6 @@
 		"url": "https://dns.console.aliyun.com/?spm=5176.100251.111252.14.594f4f15Bqt9Va#/dns/setting/corestrong.cn",
 		"icon": "",
 		"dateAdded": "2024-09-13T10:26:33.000Z"
-	},
-	{
-		"name": "云服务器低价长效特价精选",
-		"url": "https://www.aliyun.com/daily-act/ecs/99program",
-		"icon": "",
-		"dateAdded": "2024-09-13T10:31:03.000Z"
-	},
-	{
-		"name": "(阿里云)Linux部署静态html页面_阿里云搭建静态页面-CSDN博客",
-		"url": "https://blog.csdn.net/m0_50370837/article/details/126134603",
-		"icon": "",
-		"dateAdded": "2024-09-16T06:10:15.000Z"
-	},
-	{
-		"name": "ICP代备案管理系统",
-		"url": "https://beian.aliyun.com/pcContainer/uploadInfo?baOrderId=2030495615564&orderType=3",
-		"icon": "",
-		"dateAdded": "2024-09-16T08:34:56.000Z"
-	},
-	{
-		"name": "简单云(ezOne.work)一站式云原生DevOps研发协同平台|研发效能平台|让研发“简单一点”",
-		"url": "https://zxscss.ezone.work/workbench/mytask",
-		"icon": "",
-		"dateAdded": "2024-09-23T06:54:25.000Z"
 	},
 	{
 		"name": "【2023】Manim环境配置（极简版） - 知乎",
