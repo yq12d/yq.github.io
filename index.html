@@ -1,377 +1,1258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网页登录系统</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon Tech Login • HUD Scan • Users Auth</title>
+  <style>
+    :root{
+      --bg0:#f7f9fb;
+      --bg1:#ffffff;
+      --ink:#0b1220;
+      --muted:#5b667a;
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      /* 霓虹：避开蓝紫 */
+      --neon1:#16c79a;   /* teal */
+      --neon2:#ffb020;   /* amber */
+      --neon3:#a7ff3b;   /* lime */
+      --line:rgba(20, 30, 45, .10);
+      --glass:rgba(255,255,255,.70);
+      --glass2:rgba(255,255,255,.46);
+      --shadow: 0 18px 60px rgba(10, 18, 32, .14);
+      --shadow2: 0 10px 30px rgba(10, 18, 32, .10);
+      --radius: 18px;
+    }
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            width: 100%;
-            max-width: 400px;
-        }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, PingFang SC, Microsoft YaHei, Arial, sans-serif;
+      color:var(--ink);
+      overflow:hidden;
+      background:
+        radial-gradient(1200px 820px at 15% 18%, rgba(22,199,154,.12), transparent 58%),
+        radial-gradient(980px 760px at 88% 22%, rgba(255,176,32,.11), transparent 58%),
+        radial-gradient(900px 800px at 60% 86%, rgba(167,255,59,.08), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
 
-        .login-form {
-            text-align: center;
-        }
+    #fx{ position:fixed; inset:0; width:100%; height:100%; display:block; }
 
-        .login-form h2 {
-            color: #333;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
+    .specks{
+      position:fixed; inset:0; pointer-events:none;
+      background:
+        radial-gradient(2px 2px at 12% 22%, rgba(22,199,154,.35), transparent 60%),
+        radial-gradient(2px 2px at 28% 68%, rgba(255,176,32,.32), transparent 60%),
+        radial-gradient(2px 2px at 78% 32%, rgba(167,255,59,.30), transparent 60%),
+        radial-gradient(2px 2px at 84% 70%, rgba(22,199,154,.26), transparent 60%),
+        radial-gradient(2px 2px at 48% 18%, rgba(255,176,32,.22), transparent 60%);
+      opacity:.55;
+      filter: blur(.2px);
+    }
 
-        .input-group {
-            margin-bottom: 1rem;
-            position: relative;
-        }
+    .grid{
+      position:fixed; inset:0; pointer-events:none;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(closest-side at 50% 40%, rgba(0,0,0,.9), transparent 78%);
+      opacity:.75;
+    }
 
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-        }
+    .wrap{
+      position:relative;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
 
-        .input-group input:focus {
-            outline: none;
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
+    .card{
+      width:min(1020px, 100%);
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap:22px;
+      padding:22px;
+      border-radius: calc(var(--radius) + 10px);
+      background: linear-gradient(180deg, var(--glass), var(--glass2));
+      border: 1px solid rgba(15, 25, 40, .10);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position:relative;
+      overflow:hidden;
+      z-index:2;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(740px 240px at 22% 0%, rgba(22,199,154,.22), transparent 56%),
+        radial-gradient(560px 240px at 78% 0%, rgba(255,176,32,.20), transparent 56%),
+        radial-gradient(620px 280px at 55% 100%, rgba(167,255,59,.12), transparent 62%);
+      pointer-events:none;
+      opacity:.7;
+    }
 
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
+    .left{
+      position:relative;
+      padding:26px 26px 18px 26px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(15, 25, 40, .10);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
 
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
+    .brand{ display:flex; align-items:center; gap:12px; margin-bottom:14px; position:relative; z-index:1; }
+    .logo{
+      width:42px; height:42px; border-radius:14px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
+        linear-gradient(135deg, rgba(22,199,154,.95), rgba(255,176,32,.88));
+      box-shadow:
+        0 12px 28px rgba(22,199,154,.18),
+        0 0 0 6px rgba(22,199,154,.08);
+      border:1px solid rgba(15,25,40,.10);
+    }
+    .brand h1{ font-size:18px; margin:0; letter-spacing:.6px; }
+    .brand p{ margin:2px 0 0; font-size:12px; color:var(--muted); }
 
-        .login-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+    .hero{ margin-top:18px; position:relative; z-index:1; }
+    .hero h2{ margin:0 0 10px; font-size:30px; letter-spacing:.2px; line-height:1.15; }
+    .hero .sub{ margin:0 0 16px; color:var(--muted); font-size:14px; line-height:1.6; max-width:46ch; }
 
-        .error-message {
-            color: #e74c3c;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    .chip{
+      padding:9px 12px; font-size:12px; color:#1c2a3a;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(15, 25, 40, .10);
+      border-radius: 999px;
+      display:flex; align-items:center; gap:8px;
+      box-shadow: 0 10px 18px rgba(10, 18, 32, .06);
+      position:relative; overflow:hidden;
+    }
+    .chip::after{
+      content:""; position:absolute; inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+      transform: rotate(12deg);
+      animation: shine 4.6s linear infinite;
+      opacity:.45;
+    }
+    @keyframes shine{ 0%{ transform: translateX(-25%) rotate(12deg);} 100%{ transform: translateX(25%) rotate(12deg);} }
+    .dot{ width:8px;height:8px;border-radius:50%; background: var(--neon1); box-shadow: 0 0 0 4px rgba(22,199,154,.12);}
+    .dot.orange{ background: var(--neon2); box-shadow: 0 0 0 4px rgba(255,176,32,.14); }
+    .dot.lime{ background: var(--neon3); box-shadow: 0 0 0 4px rgba(167,255,59,.12); }
 
-        .success-message {
-            color: #27ae60;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
+    .right{
+      position:relative;
+      padding:26px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(15, 25, 40, .10);
+      box-shadow: var(--shadow2);
+      z-index:1;
+    }
+    .right h3{ margin:0 0 6px; font-size:18px; letter-spacing:.3px; }
+    .right .hint{ margin:0 0 14px; color:var(--muted); font-size:13px; line-height:1.5; }
 
-        .demo-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #555;
-        }
+    .demoBox{
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(15,25,40,.10);
+      border-radius: 14px;
+      padding:10px 12px;
+      box-shadow: 0 10px 18px rgba(10,18,32,.06);
+      margin-bottom: 14px;
+      color:#364155;
+      font-size:12px;
+      line-height:1.55;
+    }
+    .demoBox b{ color:#1a2434; }
+    .demoBox .tag{
+      display:inline-block;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border: 1px solid rgba(15,25,40,.12);
+      background: rgba(255,255,255,.72);
+      font-weight:800;
+    }
 
-        .jump-info {
-            background: rgba(102, 126, 234, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #4a5568;
-            border-left: 4px solid #667eea;
-        }
+    .field{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+    .label{
+      font-size:12px; color:#2b3647;
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+    }
+    .label a{
+      color:#2b3647; text-decoration:none;
+      border-bottom: 1px dashed rgba(15,25,40,.25);
+      padding-bottom:2px;
+    }
+    .label a:hover{ border-bottom-color: rgba(22,199,154,.9); color:#0f2a22; }
 
-        .loading {
-            display: inline-block;
-            animation: spin 1s linear infinite;
-        }
+    /* ===== 霓虹输入框 + 扫描线 ===== */
+    .input{
+      position:relative;
+      display:flex;
+      align-items:center;
+      border-radius: 14px;
+      border: 1px solid rgba(15,25,40,.14);
+      background: rgba(255,255,255,.86);
+      overflow:hidden;
+      transition: box-shadow .22s ease, border-color .22s ease, transform .22s ease, filter .22s ease;
+      isolation:isolate;
+    }
+    .input::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        conic-gradient(from 180deg,
+          rgba(22,199,154,.0),
+          rgba(22,199,154,.55),
+          rgba(255,176,32,.50),
+          rgba(167,255,59,.42),
+          rgba(22,199,154,.0)
+        );
+      opacity:0;
+      filter: blur(10px);
+      z-index:0;
+      transition: opacity .22s ease;
+    }
+    .input::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(22,199,154,.00) 0px,
+          rgba(22,199,154,.00) 6px,
+          rgba(22,199,154,.10) 7px,
+          rgba(22,199,154,.00) 13px
+        );
+      opacity:0;
+      mix-blend-mode:multiply;
+      z-index:1;
+      transform: translateY(-20%);
+    }
+    .energy{
+      position:absolute; inset:-40% -70%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+      transform: rotate(10deg);
+      opacity:0;
+      z-index:2;
+      pointer-events:none;
+    }
+    .input .icon{
+      width:42px;
+      display:grid;
+      place-items:center;
+      color:#2b3647;
+      opacity:.9;
+      position:relative;
+      z-index:3;
+    }
+    .input input{
+      width:100%;
+      border:none; outline:none;
+      padding:12px 12px 12px 0;
+      background:transparent;
+      font-size:14px;
+      color:var(--ink);
+      position:relative;
+      z-index:3;
+    }
+    .input:focus-within{
+      border-color: rgba(22,199,154,.70);
+      box-shadow:
+        0 0 0 7px rgba(22,199,154,.12),
+        0 18px 34px rgba(22,199,154,.12);
+      transform: translateY(-1px);
+      filter: saturate(1.06);
+    }
+    .input:focus-within::before{ opacity:1; }
+    .input:focus-within::after{ opacity:1; animation: scan 1.45s linear infinite; }
+    .input:focus-within .energy{ opacity:.55; animation: energy 1.8s ease-in-out infinite; }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    @keyframes scan{ 0%{ transform: translateY(-30%);} 100%{ transform: translateY(30%);} }
+    @keyframes energy{
+      0%{ transform: translateX(-10%) rotate(10deg); }
+      50%{ transform: translateX(10%) rotate(10deg); }
+      100%{ transform: translateX(-10%) rotate(10deg); }
+    }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
+    /* ===== 实时强度条/信号灯 ===== */
+    .meterRow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; margin:-2px 0 10px;
+    }
+    .meter{
+      flex:1;
+      height:10px;
+      border-radius: 999px;
+      background: rgba(15,25,40,.08);
+      border: 1px solid rgba(15,25,40,.10);
+      overflow:hidden;
+      position:relative;
+    }
+    .meter > i{
+      display:block;
+      height:100%;
+      width:0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(22,199,154,.95), rgba(255,176,32,.90), rgba(167,255,59,.85));
+      box-shadow: 0 0 16px rgba(22,199,154,.18);
+      transition: width .18s ease;
+    }
+    .signals{
+      display:flex; align-items:center; gap:6px;
+      padding:6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,25,40,.10);
+      background: rgba(255,255,255,.70);
+      box-shadow: 0 10px 18px rgba(10, 18, 32, .06);
+      min-width: 92px;
+      justify-content:center;
+    }
+    .led{
+      width:10px; height:10px; border-radius:50%;
+      background: rgba(15,25,40,.16);
+      box-shadow: inset 0 0 0 1px rgba(15,25,40,.10);
+      transition: background .18s ease, box-shadow .18s ease, transform .18s ease, opacity .18s ease;
+      opacity:.55;
+    }
+    .led.on{
+      opacity:1;
+      transform: translateY(-.5px);
+      box-shadow: 0 0 0 4px rgba(22,199,154,.12), 0 10px 18px rgba(10,18,32,.08);
+    }
+    .led.l1.on{ background: rgba(22,199,154,.95); box-shadow: 0 0 0 4px rgba(22,199,154,.12), 0 0 18px rgba(22,199,154,.22); }
+    .led.l2.on{ background: rgba(255,176,32,.95); box-shadow: 0 0 0 4px rgba(255,176,32,.14), 0 0 18px rgba(255,176,32,.18); }
+    .led.l3.on{ background: rgba(167,255,59,.95); box-shadow: 0 0 0 4px rgba(167,255,59,.12), 0 0 18px rgba(167,255,59,.18); }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+    .meterText{
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      min-width: 92px;
+      text-align:right;
+    }
 
-        .shake {
-            animation: shake 0.5s ease-in-out;
-        }
+    .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; margin: 10px 0 16px;
+      font-size:12px; color:var(--muted);
+    }
 
-        /* 响应式设计 */
-        @media (max-width: 480px) {
-            .container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-            
-            .login-form h2 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    .btn{
+      width:100%;
+      border:none;
+      cursor:pointer;
+      padding:12px 14px;
+      border-radius: 14px;
+      font-size:14px;
+      font-weight:900;
+      color:#0b1220;
+      background:
+        radial-gradient(12px 12px at 20% 30%, rgba(255,255,255,.9), rgba(255,255,255,0) 70%),
+        linear-gradient(135deg, rgba(22,199,154,.95), rgba(255,176,32,.92));
+      box-shadow:
+        0 14px 30px rgba(22,199,154,.18),
+        0 0 0 6px rgba(255,176,32,.06);
+      transition: transform .12s ease, filter .12s ease, opacity .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter:saturate(1.06); }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+    .btn:disabled{ opacity:.60; cursor:not-allowed; transform:none; }
+
+    .divider{
+      display:flex; align-items:center; gap:10px;
+      margin:14px 0; color:var(--muted); font-size:12px;
+    }
+    .divider::before,.divider::after{ content:""; height:1px; flex:1; background: rgba(15,25,40,.14); }
+
+    .oauth{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .ghost{
+      border: 1px solid rgba(15,25,40,.14);
+      background: rgba(255,255,255,.82);
+      border-radius: 14px;
+      padding:11px 12px;
+      cursor:pointer;
+      font-weight:900;
+      color:#1a2434;
+      box-shadow: 0 12px 22px rgba(10,18,32,.06);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      position:relative; overflow:hidden;
+    }
+    .ghost::after{
+      content:""; position:absolute; inset:-50%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: rotate(12deg) translateX(-18%);
+      opacity:0;
+    }
+    .ghost:hover{
+      transform: translateY(-1px);
+      border-color: rgba(22,199,154,.50);
+      box-shadow: 0 18px 26px rgba(10,18,32,.08);
+    }
+    .ghost:hover::after{ opacity:.55; animation: btnshine 1.3s ease-out infinite; }
+    @keyframes btnshine{ 0%{ transform: rotate(12deg) translateX(-22%);} 100%{ transform: rotate(12deg) translateX(22%);} }
+
+    .foot{ margin-top:14px; font-size:12px; color:var(--muted); text-align:center; }
+    .foot b{ color:#1a2434; }
+
+    /* ===== 你原代码里的 shake / slideIn 动画（合并保留） ===== */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .shake { animation: shake 0.5s ease-in-out; }
+
+    @media (max-width: 860px){
+      .card{ grid-template-columns: 1fr; }
+      body{ overflow:auto; }
+      #fx{ opacity:.85; }
+    }
+
+    /* ===== HUD Overlay ===== */
+    .hud{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(900px 600px at 50% 45%, rgba(255,255,255,.88), rgba(255,255,255,.40) 55%, rgba(255,255,255,.10) 78%, rgba(255,255,255,.00)),
+        rgba(247,249,251,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:999;
+      overflow:hidden;
+    }
+    .hud.on{ display:flex; }
+
+    .hud .scan{
+      position:absolute;
+      left:-20%;
+      width:140%;
+      height:120px;
+      background: linear-gradient(180deg, transparent, rgba(22,199,154,.16), transparent);
+      filter: blur(2px);
+      opacity:.0;
+      transform: translateY(-40vh);
+    }
+    .hud.on .scan{
+      opacity:.75;
+      animation: hudScan 1.35s linear infinite;
+    }
+    @keyframes hudScan{
+      0%{ transform: translateY(-45vh); }
+      100%{ transform: translateY(55vh); }
+    }
+
+    .hudBox{
+      width:min(560px, 92vw);
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(15,25,40,.12);
+      box-shadow: 0 22px 70px rgba(10,18,32,.16);
+      padding: 22px 22px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hudBox::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 220px at 20% 0%, rgba(22,199,154,.18), transparent 55%),
+        radial-gradient(520px 220px at 80% 0%, rgba(255,176,32,.16), transparent 55%),
+        radial-gradient(620px 260px at 50% 100%, rgba(167,255,59,.10), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .hudTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      position:relative;
+      z-index:2;
+      margin-bottom: 14px;
+    }
+    .hudTitle{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900;
+      letter-spacing:.4px;
+    }
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border: 1px solid rgba(15,25,40,.12);
+      background: rgba(255,255,255,.70);
+      color:#1a2434;
+      box-shadow: 0 10px 18px rgba(10,18,32,.06);
+      white-space:nowrap;
+    }
+
+    .hudMain{
+      display:grid;
+      grid-template-columns: 220px 1fr;
+      gap: 14px;
+      align-items:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .ringWrap{
+      width:220px; height:220px;
+      display:grid; place-items:center;
+      position:relative;
+      margin-inline:auto;
+    }
+    .ringWrap svg{ width:220px; height:220px; display:block; }
+    .ringGlow{
+      position:absolute; inset:-12px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(22,199,154,.18), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(255,176,32,.14), transparent 55%),
+        radial-gradient(circle at 50% 80%, rgba(167,255,59,.10), transparent 60%);
+      filter: blur(10px);
+      opacity:.9;
+      pointer-events:none;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); opacity:.78; }
+      50%{ transform: scale(1.03); opacity:.92; }
+    }
+
+    .hudText h4{
+      margin:0 0 6px;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .hudText p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .progressBar{
+      height:12px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,25,40,.12);
+      background: rgba(15,25,40,.06);
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 10px 18px rgba(10,18,32,.06);
+    }
+    .progressBar > i{
+      display:block;
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(22,199,154,.95), rgba(255,176,32,.92), rgba(167,255,59,.86));
+      box-shadow: 0 0 18px rgba(22,199,154,.16);
+      transition: width .18s ease;
+    }
+
+    .hudBottom{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top: 14px;
+      position:relative;
+      z-index:2;
+    }
+    .hudStatus{
+      font-size:12px;
+      color:#1a2434;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border: 1px solid rgba(15,25,40,.12);
+      background: rgba(255,255,255,.70);
+      color:#1a2434;
+      box-shadow: 0 10px 18px rgba(10,18,32,.06);
+      cursor:pointer;
+      user-select:none;
+    }
+    .pill:hover{
+      border-color: rgba(22,199,154,.45);
+      box-shadow: 0 14px 22px rgba(10,18,32,.08);
+    }
+    .spinDot{
+      width:10px; height:10px; border-radius:50%;
+      background: rgba(22,199,154,.95);
+      box-shadow: 0 0 0 4px rgba(22,199,154,.12);
+      animation: spin 1.2s linear infinite;
+    }
+    @keyframes spin{ 0%{ transform: rotate(0deg);} 100%{ transform: rotate(360deg);} }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="login-form" id="loginForm">
-            <h2>🔐 用户登录</h2>
-            
-            <div class="jump-info">
-                <strong>📍 登录后跳转：</strong><br>
-                成功登录后将自动跳转到 index.html 页面
-            </div>
-            
-            <div class="demo-info">
-                <strong>演示账户：</strong><br>
-                用户名：admin 密码：123456<br>
-                用户名：user 密码：password
-            </div>
-            
-            <form onsubmit="login(event)">
-                <div class="input-group">
-                    <input type="text" id="username" placeholder="用户名" required autocomplete="username">
-                </div>
-                <div class="input-group">
-                    <input type="password" id="password" placeholder="密码" required autocomplete="current-password">
-                </div>
-                <button type="submit" class="login-btn" id="loginBtn">登录</button>
-            </form>
-            
-            <div class="error-message" id="errorMessage"></div>
-            <div class="success-message" id="successMessage"></div>
+  <canvas id="fx"></canvas>
+  <div class="grid"></div>
+  <div class="specks"></div>
+
+  <div class="wrap">
+    <div class="card" id="card" role="region" aria-label="登录面板">
+      <section class="left">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>NEO CONSOLE</h1>
+            <p>White Neon • Users Auth • HUD Scan</p>
+          </div>
         </div>
+
+        <div class="hero">
+          <h2>欢迎回来 👋</h2>
+          <p class="sub">
+            登录会先触发全屏 HUD 认证扫描，随后执行本地用户表校验（成功跳转到 <b>index2.html</b>）。✨
+          </p>
+
+          <div class="chips">
+            <div class="chip"><span class="dot"></span> HUD Circular Scan</div>
+            <div class="chip"><span class="dot orange"></span> Local Users Auth</div>
+            <div class="chip"><span class="dot lime"></span> Live Signal Meter</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="right">
+        <h3>登录</h3>
+        <p class="hint">：admin/123456、user/password、guest/guest123 🙂</p>
+
+        <div class="demoBox">
+          <b>📍 登录后跳转：</b> 成功登录后将自动跳转到 <b>index2.html</b><br/>
+          <span class="tag">提示：Ctrl+L 快速聚焦账号</span>
+        </div>
+
+        <form id="loginForm" autocomplete="on">
+          <div class="field">
+            <div class="label">
+              <span>用户名</span>
+              <span id="msg" aria-live="polite"></span>
+            </div>
+
+            <div class="input">
+              <div class="energy" aria-hidden="true"></div>
+              <div class="icon" aria-hidden="true">👤</div>
+              <input id="username" name="username" type="text" placeholder="admin / user / guest" required autocomplete="username" />
+            </div>
+          </div>
+
+          <div class="meterRow" aria-label="账号完整度">
+            <div class="meter"><i id="meterUser"></i></div>
+            <div class="signals">
+              <span class="led l1" id="u1"></span>
+              <span class="led l2" id="u2"></span>
+              <span class="led l3" id="u3"></span>
+            </div>
+            <div class="meterText" id="userText">等待输入…</div>
+          </div>
+
+          <div class="field">
+            <div class="label">
+              <span>密码</span>
+              <a href="javascript:void(0)">忘记密码？</a>
+            </div>
+
+            <div class="input">
+              <div class="energy" aria-hidden="true"></div>
+              <div class="icon" aria-hidden="true">🔒</div>
+              <input id="password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password" />
+            </div>
+          </div>
+
+          <div class="meterRow" aria-label="密码强度">
+            <div class="meter"><i id="meterPass"></i></div>
+            <div class="signals">
+              <span class="led l1" id="p1"></span>
+              <span class="led l2" id="p2"></span>
+              <span class="led l3" id="p3"></span>
+            </div>
+            <div class="meterText" id="passText">强度：—</div>
+          </div>
+
+          <div class="row">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" id="remember" style="width:16px;height:16px;accent-color: var(--neon1);" />
+              记住我
+            </label>
+            <span>环境：<b>Sandbox</b></span>
+          </div>
+
+          <button class="btn" id="loginBtn" type="submit">登录</button>
+
+          <div class="divider">或使用</div>
+
+          <div class="oauth">
+            <button class="ghost" type="button">🧩 SSO</button>
+            <button class="ghost" type="button">🔑 Passkey</button>
+          </div>
+
+          <div class="foot">
+            没有账号？<b>联系管理员开通</b> 🙂💡
+          </div>
+        </form>
+      </section>
     </div>
+  </div>
 
-    <script>
-        // 用户数据（实际项目中应该从后端获取）
-        const users = {
-            'admin': {
-                password: '123456',
-                name: '管理员',
-                role: 'admin'
-            },
-            'user': {
-                password: 'password',
-                name: '普通用户',
-                role: 'user'
-            },
-            'guest': {
-                password: 'guest123',
-                name: '访客',
-                role: 'guest'
-            }
-        };
+  <!-- HUD Overlay -->
+  <div class="hud" id="hud" aria-hidden="true">
+    <div class="scan" aria-hidden="true"></div>
 
-        // 登录函数
-        function login(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            const loginBtn = document.getElementById('loginBtn');
-            
-            // 清空消息
-            errorMessage.textContent = '';
-            successMessage.textContent = '';
-            
-            // 防止重复提交
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<span class="loading">🔄</span> 登录中...';
-            
-            // 模拟网络延迟
-            setTimeout(() => {
-                // 验证用户
-                if (users[username] && users[username].password === password) {
-                    // 登录成功
-                    successMessage.innerHTML = '✅ 登录成功！正在跳转到 index2.html...';
-                    
-                    // 显示成功动画
-                    showToast('登录成功！', 'success');
-                    
-                    // 1.5秒后跳转
-                    setTimeout(() => {
-                        try {
-                            // 跳转到index2.html页面
-                            window.location.href = 'index2.html';
-                        } catch (error) {
-                            console.error('跳转失败:', error);
-                            errorMessage.textContent = '页面跳转失败，请检查 index2.html 是否存在';
-                            resetLoginButton();
-                        }
-                    }, 1500);
-                    
-                } else {
-                    // 登录失败
-                    errorMessage.textContent = '❌ 用户名或密码错误，请重试';
-                    
-                    // 清空密码输入框
-                    document.getElementById('password').value = '';
-                    
-                    // 添加摇晃动画
-                    const container = document.querySelector('.container');
-                    container.classList.add('shake');
-                    setTimeout(() => {
-                        container.classList.remove('shake');
-                    }, 500);
-                    
-                    // 显示错误提示
-                    showToast('登录失败，请检查用户名密码', 'error');
-                    
-                    resetLoginButton();
-                }
-            }, 800); // 模拟800ms的登录验证时间
+    <div class="hudBox" role="dialog" aria-label="认证扫描">
+      <div class="hudTop">
+        <div class="hudTitle">
+          <span style="display:inline-flex;align-items:center;gap:8px;">
+            <span class="spinDot" aria-hidden="true"></span>
+            AUTH SCAN
+          </span>
+        </div>
+        <span class="badge" id="hudBadge">SECURE • v1.0</span>
+      </div>
+
+      <div class="hudMain">
+        <div class="ringWrap">
+          <div class="ringGlow" aria-hidden="true"></div>
+          <svg viewBox="0 0 120 120" aria-label="圆环进度">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="rgba(22,199,154,.95)"/>
+                <stop offset="55%" stop-color="rgba(255,176,32,.92)"/>
+                <stop offset="100%" stop-color="rgba(167,255,59,.88)"/>
+              </linearGradient>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="1.3" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <circle cx="60" cy="60" r="45"
+              fill="none"
+              stroke="rgba(15,25,40,.10)"
+              stroke-width="8"
+              stroke-linecap="round"/>
+
+            <circle id="hudCircle" cx="60" cy="60" r="45"
+              fill="none"
+              stroke="url(#g)"
+              stroke-width="8"
+              stroke-linecap="round"
+              stroke-dasharray="283"
+              stroke-dashoffset="283"
+              filter="url(#softGlow)"/>
+
+            <circle cx="60" cy="60" r="30"
+              fill="none"
+              stroke="rgba(15,25,40,.07)"
+              stroke-width="1.2"/>
+
+            <text x="60" y="62" text-anchor="middle"
+              font-size="14" font-weight="900"
+              fill="rgba(11,18,32,.92)" id="hudPct">0%</text>
+            <text x="60" y="76" text-anchor="middle"
+              font-size="7.5" font-weight="800"
+              fill="rgba(91,102,122,.95)">Verifying</text>
+          </svg>
+        </div>
+
+        <div class="hudText">
+          <h4 id="hudTitle">正在认证…</h4>
+          <p id="hudDesc">执行多因子校验、会话签名与风险评估。请稍候 ✨</p>
+
+          <div class="progressBar" aria-label="进度条">
+            <i id="hudBar"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hudBottom">
+        <div class="hudStatus" id="hudStatus">
+          <span class="spinDot" aria-hidden="true" style="animation-duration:1.0s;"></span>
+          <span>状态：<span id="hudState">初始化</span></span>
+        </div>
+        <div class="pill" id="hudCancel">取消</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+  <script>
+    // ======================
+    // 1) 用户数据（来自你提供的逻辑）
+    // ======================
+    const users = {
+      'admin': { password: '123456', name: '管理员', role: 'admin' },
+      'user':  { password: 'password', name: '普通用户', role: 'user' },
+      'guest': { password: 'guest123', name: '访客', role: 'guest' }
+    };
+
+    // ======================
+    // 2) Toast（来自你提供的逻辑，保留 slideIn 动画）
+    // ======================
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.textContent = message;
+
+      const colors = {
+        success: '#27ae60',
+        error: '#e74c3c',
+        info: '#16c79a' // 用霓虹青绿代替蓝色
+      };
+
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${colors[type] || colors.info};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        z-index: 2000;
+        font-weight: 900;
+        animation: slideIn 0.5s ease-out;
+        max-width: 320px;
+        word-wrap: break-word;
+        box-shadow: 0 14px 34px rgba(10, 18, 32, .18);
+        border: 1px solid rgba(255,255,255,.22);
+      `;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        if (toast.parentNode) toast.remove();
+      }, 3000);
+    }
+
+    // ======================
+    // 3) 实时强度条/信号灯（沿用我之前的）
+    // ======================
+    const elUser = document.getElementById('username');
+    const elPass = document.getElementById('password');
+
+    const meterUser = document.getElementById('meterUser');
+    const meterPass = document.getElementById('meterPass');
+    const userText  = document.getElementById('userText');
+    const passText  = document.getElementById('passText');
+
+    const uLED = [document.getElementById('u1'), document.getElementById('u2'), document.getElementById('u3')];
+    const pLED = [document.getElementById('p1'), document.getElementById('p2'), document.getElementById('p3')];
+
+    function setLED(leds, n){ leds.forEach((x,i)=> x.classList.toggle('on', i < n)); }
+    function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+
+    // 账号完整度：更贴合用户名输入（长度 + 是否命中用户表）
+    function userCompleteness(u){
+      let score = 0;
+      if (u.length >= 1) score += 0.25;
+      if (u.length >= 3) score += 0.25;
+      if (u.length >= 5) score += 0.20;
+      if (users[u]) score += 0.30; // 命中已知用户，提升
+      return clamp01(score);
+    }
+
+    function passStrength(p){
+      let s = 0;
+      if (p.length >= 4) s += 0.25;
+      if (p.length >= 8) s += 0.25;
+      if (/[A-Z]/.test(p) && /[a-z]/.test(p)) s += 0.20;
+      if (/\d/.test(p)) s += 0.15;
+      if (/[^A-Za-z0-9]/.test(p)) s += 0.15;
+      return clamp01(s);
+    }
+
+    function labelStrength(v){
+      if (v < 0.25) return '弱';
+      if (v < 0.55) return '一般';
+      if (v < 0.85) return '强';
+      return '极强';
+    }
+
+    function updateMeters(){
+      const u = elUser.value.trim();
+      const p = elPass.value;
+
+      const uc = userCompleteness(u);
+      meterUser.style.width = Math.round(uc * 100) + '%';
+      setLED(uLED, uc < 0.35 ? 1 : uc < 0.75 ? 2 : 3);
+      userText.textContent = u.length ? `完整度：${Math.round(uc * 100)}%` : '等待输入…';
+
+      const ps = passStrength(p);
+      meterPass.style.width = Math.round(ps * 100) + '%';
+      setLED(pLED, ps < 0.35 ? 1 : ps < 0.75 ? 2 : 3);
+      passText.textContent = p.length ? `强度：${labelStrength(ps)} (${Math.round(ps * 100)}%)` : '强度：—';
+    }
+
+    elUser.addEventListener('input', updateMeters);
+    elPass.addEventListener('input', updateMeters);
+    updateMeters();
+
+    // ======================
+    // 4) HUD 扫描（结束后调用真正的 login 校验）
+    // ======================
+    const hud = document.getElementById('hud');
+    const hudCircle = document.getElementById('hudCircle');
+    const hudPct = document.getElementById('hudPct');
+    const hudBar = document.getElementById('hudBar');
+    const hudTitle = document.getElementById('hudTitle');
+    const hudDesc = document.getElementById('hudDesc');
+    const hudState = document.getElementById('hudState');
+    const hudCancel = document.getElementById('hudCancel');
+
+    const msg = document.getElementById('msg');
+    const loginBtn = document.getElementById('loginBtn');
+    const card = document.getElementById('card');
+
+    const CIRC = 283;
+    let scanTimer = null;
+    let scanPct = 0;
+    let pendingLogin = null; // HUD 完成后要执行的登录函数
+
+    function setProgress(p){
+      const pct = Math.max(0, Math.min(100, p));
+      hudPct.textContent = pct + '%';
+      hudBar.style.width = pct + '%';
+      hudCircle.style.strokeDashoffset = String(CIRC * (1 - pct / 100));
+    }
+
+    function startHUD(onDone){
+      pendingLogin = onDone || null;
+      scanPct = 0;
+      setProgress(0);
+      hudTitle.textContent = '正在认证…';
+      hudDesc.textContent = '执行多因子校验、会话签名与风险评估。请稍候 ✨';
+      hudState.textContent = '初始化';
+
+      hud.classList.add('on');
+      hud.setAttribute('aria-hidden', 'false');
+
+      const stages = [
+        { at: 8,  state:'握手',  title:'建立安全通道', desc:'正在生成一次性密钥并进行握手…' },
+        { at: 28, state:'校验',  title:'凭证校验',     desc:'校验账号、密码策略与风险指纹…' },
+        { at: 52, state:'签名',  title:'会话签名',     desc:'签发短期会话令牌，绑定设备指纹…' },
+        { at: 76, state:'评估',  title:'风险评估',     desc:'检查异常登录、速率与地理漂移…' },
+        { at: 96, state:'完成',  title:'认证完成',     desc:'扫描结束，即将进行最终校验…' }
+      ];
+      let idx = 0;
+
+      scanTimer = setInterval(() => {
+        const delta = scanPct < 60 ? (3 + Math.random()*3) : (1.5 + Math.random()*2);
+        scanPct = Math.min(100, scanPct + delta);
+        setProgress(Math.round(scanPct));
+
+        while (idx < stages.length && scanPct >= stages[idx].at){
+          hudState.textContent = stages[idx].state;
+          hudTitle.textContent = stages[idx].title;
+          hudDesc.textContent = stages[idx].desc;
+          idx++;
         }
 
-        // 重置登录按钮状态
-        function resetLoginButton() {
-            const loginBtn = document.getElementById('loginBtn');
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = '登录';
+        if (scanPct >= 100){
+          clearInterval(scanTimer);
+          scanTimer = null;
+
+          hudState.textContent = '校验中';
+          hudTitle.textContent = '正在最终校验…';
+          hudDesc.textContent = '请稍候，正在比对用户表与密码哈希（演示）。';
+
+          // 稍作停顿，再执行真实登录（你提供的逻辑）
+          setTimeout(() => {
+            stopHUD(false);
+            if (typeof pendingLogin === 'function') pendingLogin();
+          }, 180);
         }
+      }, 90);
+    }
 
-        // 显示提示消息
-        function showToast(message, type = 'info') {
-            const toast = document.createElement('div');
-            toast.textContent = message;
-            
-            const colors = {
-                success: '#27ae60',
-                error: '#e74c3c',
-                info: '#3498db'
-            };
-            
-            toast.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${colors[type] || colors.info};
-                color: white;
-                padding: 15px 20px;
-                border-radius: 8px;
-                z-index: 1000;
-                font-weight: bold;
-                animation: slideIn 0.5s ease-out;
-                max-width: 300px;
-                word-wrap: break-word;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            `;
-            
-            document.body.appendChild(toast);
-            
-            // 3秒后自动移除
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.remove();
-                }
-            }, 3000);
+    function stopHUD(reset=true){
+      if (scanTimer) clearInterval(scanTimer);
+      scanTimer = null;
+      hud.classList.remove('on');
+      hud.setAttribute('aria-hidden', 'true');
+      if (reset) pendingLogin = null;
+    }
+
+    hudCancel.addEventListener('click', () => {
+      stopHUD();
+      resetLoginButton();
+      msg.textContent = '已取消 ⛔';
+      msg.style.color = '#b34b2a';
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && hud.classList.contains('on')) {
+        stopHUD();
+        resetLoginButton();
+      }
+    });
+
+    // ======================
+    // 5) 你给的登录逻辑（做了适配：使用本页面的 id）
+    // ======================
+    function resetLoginButton() {
+      loginBtn.disabled = false;
+      loginBtn.textContent = '登录';
+    }
+
+    // 真正的校验 + 跳转逻辑（保持你的 800ms 模拟延迟）
+    function doLoginValidation() {
+      const username = elUser.value.trim();
+      const password = elPass.value;
+
+      // 清空消息
+      msg.textContent = '';
+      msg.style.color = '';
+
+      // 防止重复提交
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">🔄</span> 登录中...';
+
+      setTimeout(() => {
+        if (users[username] && users[username].password === password) {
+          // 成功
+          msg.textContent = '✅ 登录成功！正在跳转到 index2.html...';
+          msg.style.color = '#0f7a5a';
+          showToast('登录成功！', 'success');
+
+          setTimeout(() => {
+            try {
+              window.location.href = 'index2.html';
+            } catch (error) {
+              console.error('跳转失败:', error);
+              msg.textContent = '页面跳转失败，请检查 index2.html 是否存在';
+              msg.style.color = '#b34b2a';
+              resetLoginButton();
+            }
+          }, 1500);
+
+        } else {
+          // 失败
+          msg.textContent = '❌ 用户名或密码错误，请重试';
+          msg.style.color = '#b34b2a';
+
+          // 清空密码
+          elPass.value = '';
+          updateMeters();
+
+          // 卡片摇晃
+          card.classList.add('shake');
+          setTimeout(() => card.classList.remove('shake'), 500);
+
+          showToast('登录失败，请检查用户名密码', 'error');
+          resetLoginButton();
         }
+      }, 800);
+    }
 
-        // 键盘快捷键
-        document.addEventListener('keydown', function(event) {
-            // Ctrl+L 快速聚焦到用户名输入框
-            if (event.ctrlKey && event.key === 'l') {
-                event.preventDefault();
-                document.getElementById('username').focus();
-            }
-            
-            // 回车键快速登录（当焦点在输入框时）
-            if (event.key === 'Enter') {
-                const activeElement = document.activeElement;
-                if (activeElement && (activeElement.id === 'username' || activeElement.id === 'password')) {
-                    event.preventDefault();
-                    login(event);
-                }
-            }
-        });
+    // 表单提交：先做基础校验 -> HUD -> HUD 结束后执行 doLoginValidation
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
 
-        // 页面加载完成后聚焦到用户名输入框
-        window.addEventListener('load', function() {
-            document.getElementById('username').focus();
-            
-            // 检查URL参数
-            const urlParams = new URLSearchParams(window.location.search);
-            const message = urlParams.get('message');
-            if (message) {
-                if (message === 'logout') {
-                    showToast('已成功登出', 'info');
-                }
-            }
-        });
+      const username = elUser.value.trim();
+      const password = elPass.value;
 
-        // 防止表单自动填充时的样式问题
-        document.addEventListener('DOMContentLoaded', function() {
-            // 处理浏览器自动填充
-            setTimeout(() => {
-                const inputs = document.querySelectorAll('input');
-                inputs.forEach(input => {
-                    if (input.value) {
-                        input.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-                    }
-                });
-            }, 100);
-        });
+      if (!username){
+        msg.textContent = '请输入用户名 🙂';
+        msg.style.color = '#b34b2a';
+        elUser.focus();
+        return;
+      }
+      if (!password){
+        msg.textContent = '请输入密码 🙂';
+        msg.style.color = '#b34b2a';
+        elPass.focus();
+        return;
+      }
 
-        // 错误处理
-        window.addEventListener('error', function(event) {
-            console.error('页面发生错误:', event.error);
-            showToast('页面发生错误，请刷新重试', 'error');
-        });
+      // 进入 HUD 扫描
+      startHUD(doLoginValidation);
+    });
 
-        // 在线状态检测
-        window.addEventListener('online', function() {
-            showToast('网络连接已恢复', 'success');
-        });
+    // ======================
+    // 6) 你给的快捷键 / 加载聚焦 / URL 参数 / 自动填充 / 错误 / 在线离线
+    // ======================
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.key === 'l') {
+        event.preventDefault();
+        elUser.focus();
+      }
 
-        window.addEventListener('offline', function() {
-            showToast('网络连接已断开', 'error');
+      // 让 Enter 默认交给 form submit（不重复调用）
+      // 这里不再强行 event.preventDefault() + login(event)
+    });
+
+    window.addEventListener('load', function() {
+      elUser.focus();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const message = urlParams.get('message');
+      if (message === 'logout') showToast('已成功登出', 'info');
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+          if (input.value) input.style.backgroundColor = 'rgba(255, 255, 255, 0.86)';
         });
-    </script>
+      }, 100);
+    });
+
+    window.addEventListener('error', function(event) {
+      console.error('页面发生错误:', event.error);
+      showToast('页面发生错误，请刷新重试', 'error');
+    });
+
+    window.addEventListener('online', function() { showToast('网络连接已恢复', 'success'); });
+    window.addEventListener('offline', function() { showToast('网络连接已断开', 'error'); });
+
+    // ======================
+    // 7) 3D Particle FX（保持：不走蓝紫）
+    // ======================
+    const canvas = document.getElementById('fx');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0.2, 6.2);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+    const dir = new THREE.DirectionalLight(0xffffff, 0.55);
+    dir.position.set(5, 6, 7);
+    scene.add(dir);
+
+    const COUNT = Math.min(2600, Math.floor((window.innerWidth * window.innerHeight) / 560));
+    const positions = new Float32Array(COUNT * 3);
+    const colors = new Float32Array(COUNT * 3);
+
+    const c1 = new THREE.Color(0x16c79a);
+    const c2 = new THREE.Color(0xffb020);
+    const c3 = new THREE.Color(0xa7ff3b);
+    const c4 = new THREE.Color(0x101828);
+
+    function randn() {
+      let u = 0, v = 0;
+      while (u === 0) u = Math.random();
+      while (v === 0) v = Math.random();
+      return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    }
+
+    for (let i = 0; i < COUNT; i++) {
+      const r = 1.9 + Math.random() * 1.75;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(THREE.MathUtils.clamp(randn() * 0.22, -1, 1));
+
+      const x = r * Math.sin(phi) * Math.cos(theta);
+      const y = (r * Math.cos(phi)) * 0.75;
+      const z = r * Math.sin(phi) * Math.sin(theta);
+
+      positions[i*3+0] = x;
+      positions[i*3+1] = y;
+      positions[i*3+2] = z;
+
+      const t = Math.random();
+      const col = new THREE.Color();
+      if (t < 0.45) col.copy(c1).lerp(c4, 0.10);
+      else if (t < 0.75) col.copy(c2).lerp(c4, 0.10);
+      else col.copy(c3).lerp(c4, 0.12);
+
+      colors[i*3+0] = col.r;
+      colors[i*3+1] = col.g;
+      colors[i*3+2] = col.b;
+    }
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const mat = new THREE.PointsMaterial({
+      size: 0.022,
+      transparent: true,
+      opacity: 0.78,
+      vertexColors: true,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
+
+    const ringGeo = new THREE.TorusGeometry(2.25, 0.0022, 8, 240);
+    const ringMat = new THREE.MeshBasicMaterial({ color: 0x0b1220, transparent: true, opacity: 0.12 });
+    const ring1 = new THREE.Mesh(ringGeo, ringMat);
+    ring1.rotation.x = Math.PI * 0.48;
+    ring1.rotation.y = Math.PI * 0.08;
+    scene.add(ring1);
+
+    const ring2 = ring1.clone();
+    ring2.rotation.x = Math.PI * 0.62;
+    ring2.rotation.y = Math.PI * 0.22;
+    ring2.material = ringMat.clone();
+    ring2.material.opacity = 0.09;
+    scene.add(ring2);
+
+    let mx = 0, my = 0;
+    window.addEventListener('pointermove', (e) => {
+      const nx = (e.clientX / window.innerWidth) * 2 - 1;
+      const ny = (e.clientY / window.innerHeight) * 2 - 1;
+      mx = nx; my = ny;
+    }, { passive: true });
+
+    const clock = new THREE.Clock();
+    function animate(){
+      const t = clock.getElapsedTime();
+
+      points.rotation.y = t * 0.12;
+      points.rotation.x = Math.sin(t * 0.25) * 0.08;
+
+      const s = 1 + Math.sin(t * 0.8) * 0.02;
+      points.scale.set(s, s, s);
+
+      ring1.rotation.z = t * 0.10;
+      ring2.rotation.z = -t * 0.08;
+
+      camera.position.x += (mx * 0.35 - camera.position.x) * 0.05;
+      camera.position.y += (-my * 0.22 + 0.2 - camera.position.y) * 0.05;
+      camera.lookAt(0, 0.05, 0);
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    function onResize(){
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', onResize);
+  </script>
 </body>
 </html>
