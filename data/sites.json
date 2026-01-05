@@ -23,12 +23,6 @@
 		"dateAdded": "2024-05-29T08:15:00.000Z"
 	},
 	{
-		"name": "drawnix",
-		"url": "https://drawnix.com/",
-		"icon": "🦊",
-		"dateAdded": "2024-05-29T08:15:00.000Z"
-	},
-	{
 		"name": "Interactive Code Review Assistant - Claude",
 		"url": "https://claude.ai/chat/959a269f-0a4a-44f4-bf59-043530d26adc",
 		"icon": "🌐",
@@ -45,6 +39,12 @@
 		"url": "https://www.genspark.ai/agents?id=1c42aabf-0112-4d98-a523-cab3078e8cae",
 		"icon": "🌐",
 		"dateAdded": "2025-02-18T07:06:27.000Z"
+	},
+	{
+		"name": "数字课程平台(管理端)",
+		"url": "https://study.cqie.edu.cn/login",
+		"icon": "🌐",
+		"dateAdded": "2024-10-07T14:16:31.000Z"
 	},
 	{
 		"name": "副班长资源网站",
@@ -197,16 +197,40 @@
 		"dateAdded": "2024-09-09T01:34:04.000Z"
 	},
 	{
+		"name": "异常教程 - 提供IDEA激活破解码、Pycharm激活教程",
+		"url": "https://www.exception.site/",
+		"icon": "",
+		"dateAdded": "2024-09-09T05:48:28.000Z"
+	},
+	{
 		"name": "云解析 DNS",
 		"url": "https://dns.console.aliyun.com/?spm=5176.100251.111252.14.594f4f15Bqt9Va#/dns/setting/corestrong.cn",
 		"icon": "",
 		"dateAdded": "2024-09-13T10:26:33.000Z"
 	},
 	{
+		"name": "【2023】Manim环境配置（极简版） - 知乎",
+		"url": "https://zhuanlan.zhihu.com/p/614813604",
+		"icon": "",
+		"dateAdded": "2024-10-06T10:49:50.000Z"
+	},
+	{
+		"name": "批量导入功能java实现(从前端到后端)_java实现批量上传的前后端方法-CSDN博客",
+		"url": "https://blog.csdn.net/qq_37641547/article/details/109259233",
+		"icon": "",
+		"dateAdded": "2024-10-13T09:42:59.000Z"
+	},
+	{
 		"name": "【JAVA】一篇聊透百万级数据导入导出场景问题、大数据处理策略及优化方案、EasyExcel 和 EasyPOI的玩法详解_java apache poi 百万级数据导入-CSDN博客",
 		"url": "https://blog.csdn.net/Aaaaaaatwl/article/details/142173486",
 		"icon": "",
 		"dateAdded": "2024-10-13T09:46:58.000Z"
+	},
+	{
+		"name": "Webstorm 2024.2.2 最新激活码，破解版安装教程（亲测至2099年~） - 异常教程",
+		"url": "https://www.exception.site/article/1769",
+		"icon": "",
+		"dateAdded": "2024-10-22T09:34:05.000Z"
 	},
 	{
 		"name": "jpy",
@@ -249,6 +273,24 @@
 		"url": "https://www.zhongguose.com/?ref=www.gxfcseo.com#shanchahong",
 		"icon": "",
 		"dateAdded": "2024-10-30T13:23:16.000Z"
+	},
+	{
+		"name": "电影狗 - 专业电影搜索引擎",
+		"url": "https://www.dyg2024.com/",
+		"icon": "",
+		"dateAdded": "2024-11-01T09:16:44.000Z"
+	},
+	{
+		"name": "RuoYi-WMS-VUE/docs/大屏.png at master · zccbbg/RuoYi-WMS-VUE",
+		"url": "https://github.com/zccbbg/RuoYi-WMS-VUE/blob/master/docs/%E5%A4%A7%E5%B1%8F.png",
+		"icon": "",
+		"dateAdded": "2024-11-02T15:57:38.000Z"
+	},
+	{
+		"name": "爱上她的理由 第01集完整版免费在线观看-555电影",
+		"url": "https://topwuwu.shop/vodplay/423230-3-1.html",
+		"icon": "",
+		"dateAdded": "2024-11-03T03:12:51.000Z"
 	},
 	{
 		"name": "leedl-tutorial/Homework at master · datawhalechina/leedl-tutorial",
@@ -377,6 +419,12 @@
 		"dateAdded": "2025-01-15T08:50:33.000Z"
 	},
 	{
+		"name": "手把手教你从零搭建自己的知识库_搭建个人知识库-CSDN博客",
+		"url": "https://blog.csdn.net/weixin_42907150/article/details/136047527",
+		"icon": "",
+		"dateAdded": "2025-01-15T08:52:44.000Z"
+	},
+	{
 		"name": "1 new message",
 		"url": "https://fixthephoto.com/",
 		"icon": "",
@@ -387,6 +435,12 @@
 		"url": "https://github.com/newlxj/Crawling_VectorDB_LLM",
 		"icon": "",
 		"dateAdded": "2025-01-21T06:01:55.000Z"
+	},
+	{
+		"name": "GitHub 文件加速",
+		"url": "https://github.moeyy.xyz/",
+		"icon": "",
+		"dateAdded": "2025-02-05T07:35:08.000Z"
 	},
 	{
 		"name": "localhost:11434",
@@ -405,7 +459,13 @@
 		"url": "https://eda.icisc.cn/download/toVideoDetail?id=c5d966073f054d03aa75e03253e304f7",
 		"icon": "",
 		"dateAdded": "2025-02-23T08:48:12.000Z"
-	}
+	},
+	{
+		"name": "Python 实战：如何给你的程序添加授权码机制_使用软件,作者要mac地址后给授权-CSDN博客",
+		"url": "https://blog.csdn.net/wenxuhonghe/article/details/127880072",
+		"icon": "",
+		"dateAdded": "2025-02-24T10:37:47.000Z"
+	},
 	{
 		"name": "Football - scores, schedule & odds | Sofascore",
 		"url": "https://www.sofascore.com/",
@@ -471,6 +531,12 @@
 		"url": "https://www.manongbook.com/",
 		"icon": "",
 		"dateAdded": "2025-03-24T06:15:08.000Z"
+	},
+	{
+		"name": "Adobe Acrobat Pro DC 2024 中文破解版免费下载|Acrobat dc 24网盘分享-哇哦菌",
+		"url": "https://www.waodown.com/7182.html",
+		"icon": "",
+		"dateAdded": "2025-03-25T06:25:43.000Z"
 	},
 	{
 		"name": "Practice Introduction to Neural Networks | Brilliant",
